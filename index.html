@@ -2,26 +2,100 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title> buat ica sayanggg❤️</title>
+  <title>buat cewe ku tercintaaa❤️</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
       height: 100vh;
+      background: linear-gradient(135deg, #ffb6c1, #ffc0cb);
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #0f0f0f;
-      color: white;
       font-family: Arial, sans-serif;
-      text-align: center;
+      overflow: hidden;
     }
+
+    .container {
+      text-align: center;
+      color: white;
+      padding: 20px;
+      opacity: 1;
+      transition: opacity 0.6s ease;
+    }
+
+    .fade-out {
+      opacity: 0;
+    }
+
     h1 {
       font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 25px;
+      background: white;
+      color: #ff69b4;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:active {
+      transform: scale(0.95);
     }
   </style>
 </head>
 <body>
-  <h1> kamu tau nggaa❤️<br> aku tuhh cinta banget sama kamuu</h1>
+
+  <div id="page" class="container">
+    <h1>haloo sayanggkuu coba pencet dehh</h1>
+    <button onclick="nextPage()">pencet ini 💕</button>
+  </div>
+
+  <script>
+    const pages = [
+      {
+        text: "haloo sayanggkuu coba pencet dehh"
+        button: "pencet ini 💕"
+      },
+      {
+        text: "aku mw ngasih sedikit keluh kesah aku sama kamu selama ini",
+        button: "lanjuttt"
+      },
+      {
+        text: "emmm bukan keluh kesah sih lebih ke cerita aja pas aku sama kamu, gimana rasanya rasanya senang banget",
+        button: "masih ada lagi"
+      },
+      {
+        text: "kadang suka sedih sih kamu cukein, but sokey, kamu tau kan aku kuatt, iyalah anak mamah ni bossz wkwk, kadang suka kesel juga pas kamu diemin akua",
+        button: "terakhir nih 🫶"
+      },
+      {
+        text: "walaupun gituu, aku tetep cinta sama kamu, dan itu gabakal berubah, jdi kedepannya kita sama sama terus yaaa okeiii hehe",
+        button: "love you (ini tombol ulang deh kayaknya"
+      }
+    ];
+
+    let index = 0;
+    const pageEl = document.getElementById("page");
+
+    function nextPage() {
+      pageEl.classList.add("fade-out");
+
+      setTimeout(() => {
+        index = (index + 1) % pages.length;
+        pageEl.innerHTML = `
+          <h1>${pages[index].text}</h1>
+          <button onclick="nextPage()">${pages[index].button}</button>
+        `;
+        pageEl.classList.remove("fade-out");
+      }, 600);
+    }
+  </script>
+
 </body>
 </html>
