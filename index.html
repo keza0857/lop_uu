@@ -2,13 +2,14 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>buat cewe ku tercintaaa❤️</title>
+  <title>buat cewe ku yg imut lucu gemoyyy❤️</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(135deg, #ffb6c1, #ffc0cb);
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -20,81 +21,134 @@
       text-align: center;
       color: white;
       padding: 20px;
-      opacity: 1;
-      transition: opacity 0.6s ease;
+      max-width: 90%;
+      position: relative;
+      z-index: 2;
     }
 
-    .fade-out {
-      opacity: 0;
-    }
-
-    h1 {
-      font-size: 2rem;
+    .text {
+      font-size: 1.8rem;
       margin-bottom: 30px;
+      animation: slideIn 0.6s ease;
     }
 
     button {
-      padding: 12px 25px;
+      padding: 12px 28px;
       font-size: 1rem;
       border: none;
-      border-radius: 25px;
+      border-radius: 30px;
       background: white;
-      color: #ff69b4;
-      cursor: pointer;
+      color: #ff5f9e;
       font-weight: bold;
+      cursor: pointer;
     }
 
     button:active {
       transform: scale(0.95);
     }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .fade-out {
+      animation: fadeOut 0.4s ease forwards;
+    }
+
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+    }
+
+    /* ❤️ LOVE JATUH */
+    .heart {
+      position: fixed;
+      top: -10px;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 20px;
+      animation: fall linear forwards;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <div id="page" class="container">
-    <h1>haloo sayanggkuu coba pencet dehh</h1>
-    <button onclick="nextPage()">pencet ini 💕</button>
+  <div class="container">
+    <div id="text" class="text">
+      haloo sayanggkuu coba pencet dehh
+    </div>
+    <button id="btn">pencet ini 💕</button>
   </div>
 
   <script>
     const pages = [
-      {
-        text: "haloo sayanggkuu coba pencet dehh"
-        button: "pencet ini 💕"
-      },
-      {
-        text: "aku mw ngasih sedikit keluh kesah aku sama kamu selama ini",
-        button: "lanjuttt"
-      },
-      {
-        text: "emmm bukan keluh kesah sih lebih ke cerita aja pas aku sama kamu, gimana rasanya rasanya senang banget",
-        button: "masih ada lagi"
-      },
-      {
-        text: "kadang suka sedih sih kamu cukein, but sokey, kamu tau kan aku kuatt, iyalah anak mamah ni bossz wkwk, kadang suka kesel juga pas kamu diemin akua",
-        button: "terakhir nih 🫶"
-      },
-      {
-        text: "walaupun gituu, aku tetep cinta sama kamu, dan itu gabakal berubah, jdi kedepannya kita sama sama terus yaaa okeiii hehe",
-        button: "love you (ini tombol ulang deh kayaknya"
-      }
+      "haloo sayanggkuu coba pencet dehh",
+      "aku mw ngasih sedikit keluh kesah aku sama kamu selama ini",
+      "emmm bukan keluh kesah sih lebih ke cerita aja pas aku sama kamu, gimana rasanya rasanya senang banget",
+      "kadang suka sedih sih kamu cukein, but sokey, kamu tau kan aku kuatt, iyalah anak mamah ni bossz wkwk, kadang suka kesel juga pas kamu diemin aku",
+      "walaupun gituu, aku tetep cinta sama kamu, dan itu gabakal berubah, jdi kedepannya kita sama sama terus yaaa okeiii hehe"
     ];
 
     let index = 0;
-    const pageEl = document.getElementById("page");
+    const textEl = document.getElementById("text");
+    const btn = document.getElementById("btn");
 
-    function nextPage() {
-      pageEl.classList.add("fade-out");
+    btn.addEventListener("click", () => {
+      textEl.classList.add("fade-out");
 
       setTimeout(() => {
         index = (index + 1) % pages.length;
-        pageEl.innerHTML = `
-          <h1>${pages[index].text}</h1>
-          <button onclick="nextPage()">${pages[index].button}</button>
-        `;
-        pageEl.classList.remove("fade-out");
-      }, 600);
+        textEl.textContent = pages[index];
+
+        textEl.classList.remove("fade-out");
+        textEl.style.animation = "none";
+        void textEl.offsetWidth;
+        textEl.style.animation = "slideIn 0.6s ease";
+      }, 400);
+    });
+
+    /* ❤️ GENERATE LOVE */
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = 16 + Math.random() * 20 + "px";
+      heart.style.animationDuration = 4 + Math.random() * 3 + "s";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 7000);
     }
+
+    setInterval(createHeart, 500);
   </script>
 
 </body>
