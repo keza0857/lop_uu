@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>buat icaa cewe gweh ❤️</title>
+  <title>buat kamu ❤️</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -20,7 +20,7 @@
 
     .container {
       text-align: center;
-      color: white;
+      color: #ffeef3;
       padding: 20px;
       max-width: 90%;
       font-size: 1.8rem;
@@ -32,22 +32,15 @@
     .heart {
       position: fixed;
       top: -10px;
-      color: rgba(255,255,255,0.85);
-      font-size: 20px;
+      font-size: 18px;
       animation: fall linear forwards;
       z-index: 1;
       pointer-events: none;
     }
 
     @keyframes fall {
-      from {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      to {
-        transform: translateY(110vh);
-        opacity: 0;
-      }
+      from { transform: translateY(0); opacity: 1; }
+      to   { transform: translateY(110vh); opacity: 0; }
     }
   </style>
 </head>
@@ -57,32 +50,41 @@
 
   <script>
     const pages = [
-      "haloo sayanggkuu coba geser ke kiri 👉",
-      "aku mw ngasih sedikit keluh kesah aku sama kamu selama ini",
-      "emmm bukan keluh kesah sih lebih ke cerita aja pas aku sama kamu, gimana rasanya rasanya senang banget",
-      "kadang suka sedih sih kamu cukein, but sokey, kamu tau kan aku kuatt, iyalah anak mamah ni bossz wkwk, kadang suka kesel juga pas kamu diemin aku",
-      "walaupun gituu, aku tetep cinta sama kamu, dan itu gabakal berubah, jdi kedepannya kita sama sama terus yaaa okeiii hehe ❤️"
+      "haloo <span style='color:white;'>sayanggkuu</span> coba geser ke kiri 👉",
+
+      "aku mw ngasih sedikit <span style='color:white;'>keluh kesah</span> aku sama kamu selama ini",
+
+      "emmm bukan keluh kesah sih lebih ke <span style='color:white;'>cerita aja</span> pas aku sama kamu, gimana rasanya rasanya senang banget",
+
+      "kadang suka sedih sih kamu <span style='color:white;'>cukein</span>, but sokey, kamu tau kan aku kuatt, iyalah anak mamah ni bossz wkwk, kadang suka kesel juga pas kamu diemin aku",
+
+      "walaupun gituu, aku <span style='color:white;'>tetep cinta sama kamu</span>, dan itu gabakal berubah, jdi kedepannya kita sama sama terus yaaa okeiii hehe ❤️"
     ];
 
     let index = 0;
-    let charIndex = 0;
     const textEl = document.getElementById("text");
 
-    function typeText() {
-      if (charIndex < pages[index].length) {
-        textEl.textContent += pages[index].charAt(charIndex);
-        charIndex++;
-        setTimeout(typeText, 45);
+    function typeHTML(html, speed = 45) {
+      textEl.innerHTML = "";
+      let i = 0;
+
+      function typing() {
+        if (i < html.length) {
+          if (html[i] === "<") {
+            const end = html.indexOf(">", i);
+            textEl.innerHTML += html.substring(i, end + 1);
+            i = end + 1;
+          } else {
+            textEl.innerHTML += html[i];
+            i++;
+          }
+          setTimeout(typing, speed);
+        }
       }
+      typing();
     }
 
-    function showPage() {
-      textEl.textContent = "";
-      charIndex = 0;
-      typeText();
-    }
-
-    showPage();
+    typeHTML(pages[index]);
 
     // 👉 SWIPE
     let startX = 0;
@@ -95,66 +97,22 @@
       let endX = e.changedTouches[0].clientX;
       if (startX - endX > 50) {
         index = (index + 1) % pages.length;
-        showPage();
+        typeHTML(pages[index]);
       }
     });
 
-    // ❤️ LOVE JATUH
+    // ❤️ LOVE
     function createHeart() {
       const heart = document.createElement("div");
       heart.className = "heart";
       heart.innerHTML = "❤️";
       heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = 14 + Math.random() * 18 + "px";
       heart.style.animationDuration = 4 + Math.random() * 3 + "s";
-
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 7000);
     }
 
     setInterval(createHeart, 700);
-  </script>
-
-</body>
-</html>
-"walaupun gituu, aku tetep cinta sama kamu, dan itu gabakal berubah, jdi kedepannya kita sama sama terus yaaa okeiii hehe"
-    ];
-
-    let index = 0;
-    const textEl = document.getElementById("text");
-    const btn = document.getElementById("btn");
-
-    btn.addEventListener("click", () => {
-      textEl.classList.add("fade-out");
-
-      setTimeout(() => {
-        index = (index + 1) % pages.length;
-        textEl.textContent = pages[index];
-
-        textEl.classList.remove("fade-out");
-        textEl.style.animation = "none";
-        void textEl.offsetWidth;
-        textEl.style.animation = "slideIn 0.6s ease";
-      }, 400);
-    });
-
-    /* ❤️ GENERATE LOVE */
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "❤️";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = 16 + Math.random() * 20 + "px";
-      heart.style.animationDuration = 4 + Math.random() * 3 + "s";
-
-      document.body.appendChild(heart);
-
-      setTimeout(() => {
-        heart.remove();
-      }, 7000);
-    }
-
-    setInterval(createHeart, 500);
   </script>
 
 </body>
